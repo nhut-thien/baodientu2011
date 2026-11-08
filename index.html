@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo Đội Điện Tử - Nhớ Ơn Thầy Cô</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Comfortaa:wght@400;600;700&family=Dancing+Script:wght@700&family=Patrick+Hand&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#FFF8E7] text-[#5D4037] font-['Quicksand'] relative overflow-x-hidden selection:bg-[#FFB7B2] selection:text-white">
+
+    <!-- Interactive Canvas Layer (Floating petals & hearts) -->
+    <canvas id="canvas-bg" class="fixed top-0 left-0 w-full h-full pointer-events-none z-50"></canvas>
+
+    <!-- Sticky Pastel Navbar -->
+    <header class="sticky top-0 z-40 bg-[#FFF8E7]/90 backdrop-blur-md border-b-4 border-dashed border-[#FFDAC1] shadow-sm">
+        <nav class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <span class="text-3xl animate-bounce">🎒</span>
+                <span class="font-['Dancing_Script'] text-2xl md:text-3xl font-bold text-[#E5989B]">Báo Đội Điện Tử</span>
+            </div>
+            
+            <ul class="hidden md:flex space-x-6 font-['Comfortaa'] font-bold text-sm text-[#7D5A50]">
+                <li><a href="#chuc-mung" class="hover:text-[#E5989B] transition-colors py-1 px-3 rounded-full hover:bg-[#FFB7B2]/20">🌸 Tri Ân</a></li>
+                <li><a href="#ky-niem" class="hover:text-[#E5989B] transition-colors py-1 px-3 rounded-full hover:bg-[#FFB7B2]/20">📖 Kỷ Niệm</a></li>
+                <li><a href="#tho-truyen" class="hover:text-[#E5989B] transition-colors py-1 px-3 rounded-full hover:bg-[#FFB7B2]/20">✍️ Thơ & Truyện</a></li>
+                <li><a href="#phong-van" class="hover:text-[#E5989B] transition-colors py-1 px-3 rounded-full hover:bg-[#FFB7B2]/20">💬 Trò Chuyện</a></li>
+                <li><a href="#cay-tri-an" class="hover:text-[#E5989B] transition-colors py-1 px-3 rounded-full hover:bg-[#FFB7B2]/20">🌳 Cây Lời Chúc</a></li>
+            </ul>
+
+            <button id="music-toggle" class="bg-[#FFB7B2] hover:bg-[#E5989B] text-white px-4 py-2 rounded-full font-['Comfortaa'] font-bold text-xs shadow-md transition-all transform hover:scale-105 flex items-center gap-2">
+                <i class="fa-solid fa-music"></i> <span id="music-text">Bật Nhạc Piano</span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Background Audio -->
+    <audio id="bg-music" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=sweet-piano-112179.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Main Container -->
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-16">
+
+        <!-- Hero Scrapbook Banner -->
+        <section class="relative bg-white/80 rounded-3xl p-6 md:p-12 shadow-xl border-4 border-white rotate-scrapbook">
+            <!-- Washi Tapes decoration -->
+            <div class="washi-tape tape-top-left"></div>
+            <div class="washi-tape tape-top-right"></div>
+            
+            <div class="text-center space-y-4">
+                <span class="inline-block bg-[#E2F0D9] text-[#557B46] px-4 py-1.5 rounded-full text-xs font-bold font-['Comfortaa'] tracking-wider uppercase shadow-sm">
+                    ✨ Số Đặc Biệt Chào Mừng Ngày Nhà Giáo Việt Nam 20/11 ✨
+                </span>
+                <h1 class="font-['Dancing_Script'] text-5xl md:text-7xl font-bold text-[#E5989B] drop-shadow-sm leading-tight">
+                    Nắng Thầy Cô - Mầm Tri Ân 🌻
+                </h1>
+                <p class="font-['Patrick_Hand'] text-xl md:text-2xl text-[#7D5A50] max-w-2xl mx-auto">
+                    "Có một nghề bụi phấn bám đầy tay / Người ta bảo là nghề cao quý nhất..."
+                </p>
+                <div class="pt-4 flex justify-center gap-4">
+                    <a href="#cay-tri-an" class="bg-[#B5EAD7] hover:bg-[#9BE3CC] text-[#2D6A4F] font-bold font-['Comfortaa'] px-6 py-3 rounded-2xl shadow-md transition-all hover:scale-105 flex items-center gap-2">
+                        <span>🌱 Gửi Lời Chúc Thầy Cô</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chuyên Mục 1: Lời Tri Ân & Thiệp 3D Interactive -->
+        <section id="chuc-mung" class="space-y-6">
+            <div class="text-center">
+                <h2 class="font-['Dancing_Script'] text-4xl font-bold text-[#B5EAD7] inline-block bg-[#7D5A50] px-6 py-2 rounded-2xl shadow-md text-white">
+                    💌 Thiệp Tri Ân 3D
+                </h2>
+                <p class="text-sm font-['Comfortaa'] text-[#A8897C] mt-2">Nhấp vào từng lá thư nhỏ để mở lời chúc ấm áp!</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="card-3d-container h-64 cursor-pointer" onclick="flipCard(this)">
+                    <div class="card-3d relative w-full h-full duration-700">
+                        <!-- Front -->
+                        <div class="card-front absolute w-full h-full bg-[#FFDAC1] rounded-2xl p-6 shadow-md border-2 border-white flex flex-col justify-center items-center text-center">
+                            <span class="text-5xl mb-3">🎨</span>
+                            <h3 class="font-['Caveat'] text-2xl font-bold text-[#7D5A50]">Gửi Cô Chủ Nhiệm</h3>
+                            <p class="text-xs font-['Comfortaa'] text-[#9C7A6E] mt-2">Chạm để mở nắp thư ✨</p>
+                        </div>
+                        <!-- Back -->
+                        <div class="card-back absolute w-full h-full bg-white rounded-2xl p-6 shadow-md border-2 border-[#FFDAC1] flex flex-col justify-center items-center text-center">
+                            <p class="font-['Patrick_Hand'] text-lg text-[#5D4037]">
+                                "Cảm ơn Cô đã luôn kiên nhẫn uốn nắn từng nét chữ, nâng niu từng ước mơ nhỏ bé của chúng em!"
+                            </p>
+                            <span class="text-xs font-['Comfortaa'] font-bold text-[#E5989B] mt-4">- Tập thể Chi đội 5A -</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card-3d-container h-64 cursor-pointer" onclick="flipCard(this)">
+                    <div class="card-3d relative w-full h-full duration-700">
+                        <!-- Front -->
+                        <div class="card-front absolute w-full h-full bg-[#B5EAD7] rounded-2xl p-6 shadow-md border-2 border-white flex flex-col justify-center items-center text-center">
+                            <span class="text-5xl mb-3">⚽</span>
+                            <h3 class="font-['Caveat'] text-2xl font-bold text-[#2D6A4F]">Gửi Thầy Tốt Nhất</h3>
+                            <p class="text-xs font-['Comfortaa'] text-[#408566] mt-2">Chạm để mở nắp thư ✨</p>
+                        </div>
+                        <!-- Back -->
+                        <div class="card-back absolute w-full h-full bg-white rounded-2xl p-6 shadow-md border-2 border-[#B5EAD7] flex flex-col justify-center items-center text-center">
+                            <p class="font-['Patrick_Hand'] text-lg text-[#5D4037]">
+                                "Cảm ơn Thầy đã truyền ngọn lửa nhiệt huyết, dạy chúng em biết đứng dậy sau mỗi lần vấp ngã!"
+                            </p>
+                            <span class="text-xs font-['Comfortaa'] font-bold text-[#2D6A4F] mt-4">- Đội viên Sao Tháng Tám -</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card-3d-container h-64 cursor-pointer" onclick="flipCard(this)">
+                    <div class="card-3d relative w-full h-full duration-700">
+                        <!-- Front -->
+                        <div class="card-front absolute w-full h-full bg-[#E2F0D9] rounded-2xl p-6 shadow-md border-2 border-white flex flex-col justify-center items-center text-center">
+                            <span class="text-5xl mb-3">📚</span>
+                            <h3 class="font-['Caveat'] text-2xl font-bold text-[#4B6B38]">Gửi Người Lái Đò</h3>
+                            <p class="text-xs font-['Comfortaa'] text-[#557B46] mt-2">Chạm để mở nắp thư ✨</p>
+                        </div>
+                        <!-- Back -->
+                        <div class="card-back absolute w-full h-full bg-white rounded-2xl p-6 shadow-md border-2 border-[#E2F0D9] flex flex-col justify-center items-center text-center">
+                            <p class="font-['Patrick_Hand'] text-lg text-[#5D4037]">
+                                "Tri thức thầy cô trao là hành trang quý giá nhất để chúng em vững bước vào tương lai tươi sáng."
+                            </p>
+                            <span class="text-xs font-['Comfortaa'] font-bold text-[#557B46] mt-4">- Ban Chỉ huy Liên đội -</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chuyên Mục 2: Kỷ Niệm Đẹp & Gương Tận Tụy (Scrapbook Cards) -->
+        <section id="ky-niem" class="space-y-6">
+            <div class="text-center">
+                <h2 class="font-['Dancing_Script'] text-4xl font-bold text-[#E5989B] inline-block bg-white px-6 py-2 rounded-2xl shadow-md border-2 border-[#E5989B]">
+                    📸 Kỷ Niệm & Gương Tận Tụy
+                </h2>
+                <p class="text-xs font-['Comfortaa'] text-[#9C7A6E] mt-1">(Tóm tắt từ tư liệu Báo Thiếu Niên Tiền Phong & Báo Khăn Quàng Đỏ)</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Article Polaroid 1 -->
+                <div class="bg-white p-5 rounded-2xl shadow-md border border-[#FFDAC1] space-y-4 hover:shadow-xl transition-shadow relative">
+                    <div class="washi-tape tape-top-right"></div>
+                    <div class="bg-[#FFF8E7] h-48 rounded-xl flex items-center justify-center text-6xl border border-dashed border-[#FFB7B2]">
+                        👵‍🏫
+                    </div>
+                    <h3 class="font-['Caveat'] text-2xl font-bold text-[#E5989B]">Vệt Phấn Trên Bục Giảng Vùng Cao</h3>
+                    <p class="text-sm font-['Quicksand'] text-[#7D5A50] leading-relaxed">
+                        Hơn 15 năm gắn bó với điểm trường vùng sâu, cô Nguyễn Thị Mai đã kiên trì cõng từng chữ qua suối lũ. Hình ảnh cô tỉ mỉ sửa từng nết chữ dưới ánh đèn dầu đã trở thành ngọn lửa sưởi ấm ước mơ cho hàng trăm em nhỏ vùng cao...
+                    </p>
+                    <div class="text-xs font-['Comfortaa'] text-[#A8897C] italic border-t pt-2 border-dashed border-[#FFDAC1]">
+                        📌 Nguồn: Tổng hợp & biên tập theo Báo Thiếu Niên Tiền Phong
+                    </div>
+                </div>
+
+                <!-- Article Polaroid 2 -->
+                <div class="bg-white p-5 rounded-2xl shadow-md border border-[#B5EAD7] space-y-4 hover:shadow-xl transition-shadow relative">
+                    <div class="washi-tape tape-top-left"></div>
+                    <div class="bg-[#FFF8E7] h-48 rounded-xl flex items-center justify-center text-6xl border border-dashed border-[#B5EAD7]">
+                        🌱
+                    </div>
+                    <h3 class="font-['Caveat'] text-2xl font-bold text-[#2D6A4F]">Chiếc Áo Ấm Cho Trò Nhỏ</h3>
+                    <p class="text-sm font-['Quicksand'] text-[#7D5A50] leading-relaxed">
+                        Trong cái lạnh mùa đông miền núi, thầy Lê Văn Nam đã tự tay quyên góp và mang từng chiếc áo ấm, đôi dép mới trao cho các em học sinh có hoàn cảnh khó khăn. Sự tận tụy lặng lẽ ấy là bài học lớn về lòng nhân ái mà thầy dành cho chúng em...
+                    </p>
+                    <div class="text-xs font-['Comfortaa'] text-[#A8897C] italic border-t pt-2 border-dashed border-[#B5EAD7]">
+                        📌 Nguồn: Biên tập lại theo ấn phẩm Báo Khăn Quàng Đỏ
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chuyên Mục 3: Thơ Ca & Truyện Ngắn (Book Layout) -->
+        <section id="tho-truyen" class="space-y-6">
+            <div class="text-center">
+                <h2 class="font-['Dancing_Script'] text-4xl font-bold text-[#7D5A50] inline-block bg-[#FFDAC1] px-6 py-2 rounded-2xl shadow-md">
+                    ✍️ Góc Thơ Ca & Truyện Ngắn
+                </h2>
+            </div>
+
+            <!-- E-Book Mockup -->
+            <div class="bg-white rounded-3xl p-6 md:p-10 shadow-xl border-4 border-[#FFF8E7] grid grid-cols-1 md:grid-cols-2 gap-8 relative">
+                <!-- Left Page: Poem -->
+                <div class="border-b md:border-b-0 md:border-r border-dashed border-[#FFB7B2] pb-6 md:pb-0 md:pr-8 space-y-4">
+                    <span class="bg-[#FFB7B2]/30 text-[#E5989B] font-bold font-['Comfortaa'] text-xs px-3 py-1 rounded-full">Trang Thơ Đội Viên</span>
+                    <h3 class="font-['Dancing_Script'] text-3xl font-bold text-[#E5989B]">Bụi Phấn Nhớ Ơn</h3>
+                    <div class="font-['Patrick_Hand'] text-xl text-[#7D5A50] leading-relaxed italic space-y-3">
+                        <p>Bao năm tháng thầm lặng bên bục giảng,<br>Thầy gieo mầm tri thức giữa mùa hoa.<br>Dòng sông rộng con thuyền vươn sóng lớn,<br>Nhớ ơn thầy nâng bước tháng ngày qua.</p>
+                        <p>Bụi phấn rơi vương nhẹ trên tóc bạc,<br>Cho em nét chữ, cho cả ước mơ!</p>
+                    </div>
+                    <p class="text-xs font-['Comfortaa'] text-[#A8897C] text-right">✍️ Sáng tác: Đội viên Nguyễn Minh Anh (Lớp 5B)</p>
+                </div>
+
+                <!-- Right Page: Short Story -->
+                <div class="space-y-4">
+                    <span class="bg-[#B5EAD7]/40 text-[#2D6A4F] font-bold font-['Comfortaa'] text-xs px-3 py-1 rounded-full">Truyện Ngắn</span>
+                    <h3 class="font-['Caveat'] text-3xl font-bold text-[#2D6A4F]">Lời Cảm Ơn Muộn Màng</h3>
+                    <p class="font-['Quicksand'] text-sm text-[#7D5A50] leading-relaxed">
+                        Hôm nay khi lật lại trang vở cũ có vết mực tím rèn chữ ngày nào, em mới thấu hiểu sự nghiêm khắc của cô chính là tình yêu thương sâu sắc nhất. Cành hoa hồng đỏ hôm nay kính dâng cô là cả tấm lòng tri ân sâu sắc nhất của đứa học trò nhỏ ngày nào...
+                    </p>
+                    <div class="p-3 bg-[#FFF8E7] rounded-xl border border-dashed border-[#B5EAD7] text-xs font-['Comfortaa'] text-[#7D5A50]">
+                        💡 <i>Nội dung tham khảo & cảm tác từ cuộc thi viết "Thầy Cô Trong Tim Em".</i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chuyên Mục 4: Góc Phỏng Vấn Chat UI & Việc Làm Thiết Thực -->
+        <section id="phong-van" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Left: Interview Chat UI -->
+            <div class="bg-white rounded-3xl p-6 shadow-md border-2 border-[#FFDAC1] space-y-4">
+                <h3 class="font-['Dancing_Script'] text-3xl font-bold text-[#E5989B] text-center">💬 Góc Phỏng Vấn Nhanh</h3>
+                
+                <div class="space-y-3 font-['Quicksand'] text-xs md:text-sm">
+                    <!-- Q1 -->
+                    <div class="flex gap-2 items-start">
+                        <div class="bg-[#FFB7B2] text-white p-2 rounded-full font-bold">🎤</div>
+                        <div class="bg-[#FFF8E7] p-3 rounded-2xl max-w-[80%] border border-[#FFDAC1]">
+                            <b>Báo Đội:</b> Bạn muốn gửi lời chúc gì tới thầy cô nhân ngày 20/11?
+                        </div>
+                    </div>
+                    <!-- A1 -->
+                    <div class="flex gap-2 items-start justify-end">
+                        <div class="bg-[#B5EAD7] p-3 rounded-2xl max-w-[80%] border border-[#B5EAD7] text-[#2D6A4F]">
+                            <b>Bạn Bảo An (Liên đội trưởng):</b> Em chúc thầy cô luôn mạnh khỏe, luôn giữ trọn niềm vui và ngọn lửa đam mê với nghề lái đò!
+                        </div>
+                        <div class="bg-[#B5EAD7] text-[#2D6A4F] p-2 rounded-full font-bold">🎒</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Flower Garden (Thành Tích) -->
+            <div class="bg-white rounded-3xl p-6 shadow-md border-2 border-[#B5EAD7] space-y-4 text-center">
+                <h3 class="font-['Dancing_Script'] text-3xl font-bold text-[#2D6A4F]">🌸 Vườn Bông Hoa Điểm 10</h3>
+                <p class="text-xs font-['Comfortaa'] text-[#7D5A50]">Nhấp vào bông hoa để xem thành tích dâng tặng thầy cô!</p>
+
+                <div class="flex justify-center gap-4 py-4">
+                    <button onclick="showFlowerInfo('Tuần học tốt: 100% tiết học đạt hoa điểm tốt!')" class="text-5xl transform hover:scale-125 transition-transform animate-pulse">
+                        🌺
+                    </button>
+                    <button onclick="showFlowerInfo('Công trình Măng Non: Trồng mới 20 chậu cây xanh lớp học')" class="text-5xl transform hover:scale-125 transition-transform">
+                        🌻
+                    </button>
+                    <button onclick="showFlowerInfo('Hội diễn văn nghệ: Đạt giải Nhất cấp Trường chào mừng 20/11')" class="text-5xl transform hover:scale-125 transition-transform">
+                        🌼
+                    </button>
+                </div>
+
+                <div id="flower-info" class="min-h-[50px] bg-[#FFF8E7] p-3 rounded-xl border border-dashed border-[#B5EAD7] font-['Comfortaa'] text-xs text-[#2D6A4F] font-bold flex items-center justify-center">
+                    Hãy bấm vào một bông hoa bất kỳ phía trên! ✨
+                </div>
+            </div>
+        </section>
+
+        <!-- Chuyên Mục 5: Cây Tri Ân Tương Tác (Interactive Wish Tree) -->
+        <section id="cay-tri-an" class="bg-white rounded-3xl p-6 md:p-10 shadow-xl border-4 border-[#B5EAD7] text-center space-y-6 relative overflow-hidden">
+            <h2 class="font-['Dancing_Script'] text-4xl font-bold text-[#2D6A4F]">🌳 Cây Lời Chúc Tri Ân</h2>
+            <p class="text-sm font-['Comfortaa'] text-[#7D5A50]">Hãy gửi một chiếc lá chứa lời chúc của bạn để cùng làm xanh Cây Tri Ân nhé!</p>
+
+            <!-- Form input -->
+            <div class="max-w-md mx-auto flex gap-2">
+                <input id="wish-input" type="text" placeholder="Nhập lời chúc ngắn của bạn..." class="flex-1 border-2 border-[#B5EAD7] rounded-xl px-4 py-2 font-['Quicksand'] text-sm focus:outline-none focus:border-[#2D6A4F]">
+                <button onclick="addWish()" class="bg-[#B5EAD7] hover:bg-[#9BE3CC] text-[#2D6A4F] font-bold px-4 py-2 rounded-xl transition-all font-['Comfortaa']">
+                    Gửi 🍃
+                </button>
+            </div>
+
+            <!-- Tree Wish Container -->
+            <div id="tree-container" class="min-h-[220px] bg-[#FFF8E7] rounded-2xl p-4 border border-dashed border-[#B5EAD7] flex flex-wrap gap-3 justify-center items-center">
+                <span class="bg-[#B5EAD7] text-[#2D6A4F] px-3 py-1.5 rounded-full text-xs font-['Patrick_Hand'] text-base shadow-sm">🍃 Kính chúc thầy cô mãi hạnh phúc!</span>
+                <span class="bg-[#FFDAC1] text-[#7D5A50] px-3 py-1.5 rounded-full text-xs font-['Patrick_Hand'] text-base shadow-sm">🌸 Chúc thầy cô luôn dồi dào sức khỏe!</span>
+                <span class="bg-[#FFB7B2] text-white px-3 py-1.5 rounded-full text-xs font-['Patrick_Hand'] text-base shadow-sm">💖 Cảm ơn thầy cô vì tất cả!</span>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Dẫn Nguồn Bản Quyền -->
+    <footer class="bg-[#7D5A50] text-[#FFF8E7] py-8 mt-16 border-t-4 border-[#FFDAC1]">
+        <div class="max-w-4xl mx-auto px-4 text-center space-y-3 font-['Comfortaa'] text-xs">
+            <p class="font-bold text-sm text-[#FFDAC1]">🎒 Báo Đội Điện Tử - Chào Mừng Ngày Nhà Giáo Việt Nam 20/11 🎒</p>
+            <p>Đơn vị thực hiện: Ban Chỉ Huy Liên Đội | Lập trình & Thiết kế UI/UX Scrapbook Pastel</p>
+            <p class="text-[#E5989B] italic border-t border-white/20 pt-3 max-w-2xl mx-auto">
+                * Trang báo điện tử vận dụng và tổng hợp các nguồn nội dung, bài thơ, mẩu chuyện có dẫn nguồn tham khảo từ các ấn phẩm chính thống: <b>Báo Thiếu Niên Tiền Phong</b>, <b>Báo Khăn Quàng Đỏ</b>. Tuyệt đối không sao chép toàn bộ trang báo gốc.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Custom Script -->
+    <script src="script.js"></script>
+</body>
+</html>
